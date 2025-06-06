@@ -1,23 +1,9 @@
-#include <windows.h>
-#include <commctrl.h>
-#include "resource.h"
+#include <iostream>
+#include <stdio.h>
 
-const char g_szClassName[] = "myWindowClass";
-const char g_szChildClassName[] = "myMDIChildWindowClass";
+#include "picalc.h"
 
-#define IDC_MAIN_MDI	101
-#define IDC_MAIN_TOOL	102
-#define IDC_MAIN_STATUS	103
-
-#define IDC_CHILD_EDIT	101
-
-#define ID_MDI_FIRSTCHILD 50000
-
-HWND g_hMDIClient = NULL;
-HWND g_hMainWindow = NULL;
-
-BOOL LoadTextFileToEdit(HWND hEdit, LPCTSTR pszFileName)
-{
+BOOL LoadTextFileToEdit(HWND hEdit, LPCTSTR pszFileName) {
 	HANDLE hFile;
 	BOOL bSuccess = FALSE;
 
@@ -51,8 +37,7 @@ BOOL LoadTextFileToEdit(HWND hEdit, LPCTSTR pszFileName)
 	return bSuccess;
 }
 
-BOOL SaveTextFileFromEdit(HWND hEdit, LPCTSTR pszFileName)
-{
+BOOL SaveTextFileFromEdit(HWND hEdit, LPCTSTR pszFileName) {
 	HANDLE hFile;
 	BOOL bSuccess = FALSE;
 
@@ -87,8 +72,7 @@ BOOL SaveTextFileFromEdit(HWND hEdit, LPCTSTR pszFileName)
 	return bSuccess;
 }
 
-void DoFileOpen(HWND hwnd)
-{
+void DoFileOpen(HWND hwnd) {
 	OPENFILENAME ofn;
 	char szFileName[MAX_PATH] = "";
 
@@ -115,8 +99,7 @@ void DoFileOpen(HWND hwnd)
 	}
 }
 
-void DoFileSave(HWND hwnd)
-{
+void DoFileSave(HWND hwnd) {
 	OPENFILENAME ofn;
 	char szFileName[MAX_PATH] = "";
 
@@ -143,8 +126,7 @@ void DoFileSave(HWND hwnd)
 	}
 }
 
-HWND CreateNewMDIChild(HWND hMDIClient)
-{
+HWND CreateNewMDIChild(HWND hMDIClient) {
 	MDICREATESTRUCT mcs;
 	HWND hChild;
 
@@ -164,12 +146,12 @@ HWND CreateNewMDIChild(HWND hMDIClient)
 	return hChild;
 }
 
-LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	switch(msg)
 	{
 		case WM_CREATE:
 		{
+		  std::wcout << L"MAX_LOADSTRING: " << MAX_LOADSTRING << std::endl;
 			HWND hTool;
 			TBBUTTON tbb[3];
 			TBADDBITMAP tbab;
@@ -276,6 +258,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			SetWindowPos(hMDI, NULL, 0, iToolHeight, rcClient.right, iMDIHeight, SWP_NOZORDER);
 		}
 		break;
+		case WM_PAINT:
+		break;
 		case WM_CLOSE:
 			DestroyWindow(hwnd);
 		break;
@@ -338,8 +322,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-LRESULT CALLBACK MDIChildWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
+LRESULT CALLBACK MDIChildWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	switch(msg)
 	{
 		case WM_CREATE:
@@ -426,8 +409,7 @@ LRESULT CALLBACK MDIChildWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 	return 0;
 }
 
-BOOL SetUpMDIChildWindowClass(HINSTANCE hInstance)
-{
+BOOL SetUpMDIChildWindowClass(HINSTANCE hInstance) {
 	WNDCLASSEX wc;
 
 	wc.cbSize		 = sizeof(WNDCLASSEX);
@@ -453,13 +435,20 @@ BOOL SetUpMDIChildWindowClass(HINSTANCE hInstance)
 		return TRUE;
 }
 
-
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-	LPSTR lpCmdLine, int nCmdShow)
-{
+int APIENTRY WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+	LPTSTR lpCmdLine, int nCmdShow) {
+	UNREFERENCED_PARAMETER(hPrevInstance);
 	WNDCLASSEX wc;
 	HWND hwnd;
 	MSG Msg;
+
+  // Allow and allocate conhost
+  AllocConsole();
+
+  // File handler pointer to a dummy file, possibly an actual logfile
+  FILE* fNonExistFile = fDummyFile;
+  freopen_s(&fNonExistFile, "CONOUT$", "w", stdout);
+  freopen_s(&fNonExistFile, "CONOUT$", "w", stderr);
 
 	InitCommonControls();
 
