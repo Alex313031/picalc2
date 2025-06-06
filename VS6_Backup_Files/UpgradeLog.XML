@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="picalc">
+</Property><Property Name="Solution File" Value="Z:\picalc2\picalc.sln">
+</Property><Property Name="User Options File" Value="Z:\picalc2\picalc.suo">
+</Property><Property Name="Date" Value="Friday, June 06, 2025">
+</Property><Property Name="Time" Value="1:33 AM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="picalc.sln" Description="File successfully backed up as Z:\picalc2\picalc.sln.old">
+</Event><Event ErrorLevel="0" Project="" Source="picalc.suo" Description="File successfully backed up as Z:\picalc2\picalc.suo.old">
+</Event><Event ErrorLevel="0" Project="picalc" Source="picalc.vcproj" Description="Converting project file 'Z:\picalc2\picalc.vcproj'.">
+</Event><Event ErrorLevel="1" Project="picalc" Source="picalc.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="picalc" Source="picalc.vcproj" Description="MSB8012: $(TargetPath) ('Z:\picalc2\.\Release\picalc.exe') does not match the Linker's OutputFile property value '.\Release/picalc.exe' ('Z:\picalc2\Release/picalc.exe') in project configuration 'Release|Win32'. This may cause your project to build incorrectly. To correct this, please make sure that $(TargetPath) property value matches the value specified in %(Link.OutputFile).">
+</Event><Event ErrorLevel="1" Project="picalc" Source="picalc.vcproj" Description="MSB8012: $(TargetPath) ('Z:\picalc2\.\Debug\picalc.exe') does not match the Linker's OutputFile property value '.\Debug/picalc.exe' ('Z:\picalc2\Debug/picalc.exe') in project configuration 'Debug|Win32'. This may cause your project to build incorrectly. To correct this, please make sure that $(TargetPath) property value matches the value specified in %(Link.OutputFile).">
+</Event><Event ErrorLevel="0" Project="picalc" Source="picalc.vcproj" Description="Done converting to new project file 'Z:\picalc2\picalc.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="picalc" Source="picalc.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="picalc.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="picalc.sln" Description="Converted">
+</Event></UpgradeLog>
